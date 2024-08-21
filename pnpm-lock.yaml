@@ -14,6 +14,9 @@ importers:
       axios:
         specifier: ^1.7.4
         version: 1.7.4
+      inter-ui:
+        specifier: ^4.0.2
+        version: 4.0.2
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -992,6 +995,10 @@ packages:
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
+
+  inter-ui@4.0.2:
+    resolution: {integrity: sha512-YmfzwEtzuVzEenQwSB/tmmqi/A0a2GnFk4mG4ZFULXiO5DNk0fJWiO3o9i1sdVKuMVGx9iiNQnCq8ghWZJVVHw==}
+    engines: {node: '>=16.0.0'}
 
   internal-slot@1.0.7:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
@@ -2745,6 +2752,8 @@ snapshots:
       resolve-from: 4.0.0
 
   imurmurhash@0.1.4: {}
+
+  inter-ui@4.0.2: {}
 
   internal-slot@1.0.7:
     dependencies:
