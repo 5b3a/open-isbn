@@ -7,7 +7,16 @@ export default {
   /* the lines between these comments */
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily : {
+        Inter : ["MInter","sans-serif"],
+        martian : ["martian mono","monospace"],
+        
+      },
+      borderWidth : {
+        3 : "3px"
+      }
+    },
   },
   plugins: [],
 }
