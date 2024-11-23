@@ -26,7 +26,7 @@ function Main({
       <div className="grid w-full grid-flow-row place-items-start gap-2 bg-slate-200 p-2 md:grid-flow-col">
         {/* {image} */}
 
-        <div className="grid min-h-[500px] w-full place-items-center rounded-lg border-2 border-black p-1">
+        <div className="grid min-h-[500px] w-full place-items-center rounded-lg border-2 border-black p-1 h-full">
           <img
             src={imgUrl}
             alt={title}
