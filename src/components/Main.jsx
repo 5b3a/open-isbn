@@ -23,23 +23,29 @@ function Main({
         size: 28,
       }}
     >
-      <div className="grid w-full grid-flow-row place-items-center gap-1 bg-slate-200 p-2 md:grid-cols-2">
+      <div className="grid w-full grid-flow-row place-items-start gap-2 bg-slate-200 p-2 md:grid-flow-col">
         {/* {image} */}
-        <div className="grid min-h-[500px] w-fit place-items-center rounded-lg border-2 border-black p-1 md:w-10/12">
-          <img src={imgUrl} alt={title} className="w-full rounded-md" />
+
+        <div className="grid min-h-[500px] w-full place-items-center rounded-lg border-2 border-black p-1">
+          <img
+            src={imgUrl}
+            alt={title}
+            className="aspect-auto h-full w-full rounded-md"
+          />
         </div>
 
         {/* details */}
-        <div className="grid w-full grid-flow-row place-items-start gap-1 place-self-start rounded-lg border-2 border-black p-1 lg:h-full">
+        <div className="flex h-full w-full flex-col items-start gap-4 rounded-lg border-2 border-black p-1">
           {/* title */}
-          <span className="font-inter hyphens-auto rounded-md border-2 border-black p-1 text-lg font-extrabold uppercase tracking-wide text-black md:text-2xl lg:text-4xl">
+          <span className="font-inter w-full hyphens-auto rounded-md p-1 text-lg font-extrabold uppercase tracking-wide text-black md:text-4xl lg:text-8xl">
             {title}
           </span>
 
           {/* authors section */}
-          <section className="flex flex-wrap justify-start gap-1 font-medium capitalize tracking-wider">
+          <section className="flex w-full flex-wrap justify-start gap-1 font-medium capitalize tracking-wider">
             {authors.map((author, i) => (
               <a
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={i}
                 className="bind-text-primary inline-flex cursor-pointer items-center gap-1 rounded-lg border-2 border-black p-0.5"
                 href={author.url}
@@ -56,8 +62,9 @@ function Main({
 
           {/* publisher */}
           <section className="grid w-fit grid-flow-row place-items-start gap-1 font-medium capitalize tracking-wider">
-            {pubH.map((publiser, i) => (
+            {pubH.map((publisher, i) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={i}
                 className="bind-text-primary inline-flex w-full items-center justify-stretch gap-1 rounded-lg border-2 border-black p-0.5"
               >
@@ -65,7 +72,7 @@ function Main({
                   <Buildings />
                 </span>
                 <span className="grid place-content-center rounded-md p-0.5">
-                  {publiser.name}
+                  {publisher.name}
                 </span>
               </div>
             ))}
@@ -74,15 +81,17 @@ function Main({
           {/* date and pages */}
           <section className="grid w-fit grid-flow-col place-items-start gap-1 font-medium capitalize tracking-wider">
             {/* pages */}
-
-            <div className="inline-flex h-full w-full cursor-pointer flex-wrap items-center justify-stretch gap-1 rounded-lg border-2 border-black p-0.5">
-              <span className="grid place-content-center rounded-md p-0.5">
-                <BookOpenText size={20} weight="bold" />
-              </span>
-              <span className="grid place-content-center rounded-md p-0.5 text-sm font-bold">
-                {Number(pages)}
-              </span>
-            </div>
+            {Number(pages) > 1 ? (
+              <div className="inline-flex h-full w-full cursor-pointer flex-wrap items-center justify-stretch gap-1 rounded-lg border-2 border-black p-0.5">
+                <span className="grid place-content-center rounded-md p-0.5">
+                  <BookOpenText size={20} weight="bold" />
+                </span>
+                <span className="grid place-content-center rounded-md p-0.5 text-sm font-bold">
+                  {Number(pages)}
+                </span>{" "}
+                : null
+              </div>
+            ) : null}
 
             {/* date */}
             <div className="inline-flex w-full flex-wrap items-center justify-center gap-1 rounded-lg border-2 border-black p-0.5 sm:justify-stretch">
@@ -101,6 +110,7 @@ function Main({
             {authors.map((author, i) => (
               <a
                 href={author.url}
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={i}
                 className="bind-text-primary grid cursor-pointer place-items-center items-center gap-1 rounded-md border-2 border-black p-1"
               >
@@ -111,11 +121,12 @@ function Main({
           <hr className="mt-2 h-0.5 w-full bg-slate-800/30" />
 
           {/* ope in open lib */}
-          <section className="flex flex-wrap justify-center gap-1 font-medium capitalize tracking-wider w-full">
+          <section className="flex w-full flex-wrap justify-center gap-1 font-medium capitalize tracking-wider">
             <a
-              className="bind-text-primary inline-flex cursor-pointer items-center gap-1 rounded-lg border-2 border-black p-0.5 bg-sky-500"
+              className="bind-text-primary inline-flex cursor-pointer items-center gap-1 rounded-lg border-2 border-black bg-sky-500 p-0.5"
               href={olUrl}
               target="_blank"
+              rel="noreferrer"
             >
               <span className="grid place-items-center rounded-md p-0.5">
                 Open In Open Library
