@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 .btn-border{
-    @apply border-2 border-black outline-none
+    @apply border-2 border-black outline-none;
 }
 .bind-text-primary{
     @apply hover:bg-emerald-500 focus:bg-emerald-500 focus:text-white hover:text-white hover:placeholder:text-white active:placeholder:text-white focus:placeholder:text-white ease-linear transition-all

@@ -6,36 +6,37 @@ import { useState } from "react";
 import SearchSection from "./components/SearchSection";
 
 import axios from "axios";
+import { useEffect } from "react";
+import { baseUrl, headers, resultUrl } from "./config/config";
+import AboutIsbn from "./components/AboutIsbn";
 
 function App() {
   const sbox = useRef(null);
   const [getProps, setprops] = useState({});
   const [show, setShow] = useState(false);
 
-  const h = new Headers({
-    "User-Agent": "OpenISBNLookup/0.0.1 (itzz@duck.com)",
-    accept: "application/json",
-  });
-
-  const b = "https://openlibrary.org/api";
-
   const handlclick = async (e) => {
     e.preventDefault();
-    const val = sbox.current.value.trim();
-    const m = `/books?bibkeys=${val}&format=json&jscmd=data`;
-    console.log(m);
+
+    if (sbox.current.value.length < 1) {
+      setShow(true);
+      return;
+    }
+
+    const isbnValue = sbox.current.value.trim().replace(/[^\w\s]/gi, "");
+    sbox.current.value = isbnValue;
+    const apiUrl = resultUrl(isbnValue);
 
     axios({
       method: "GET",
-      baseURL: b,
-      url: m,
-      headers: { ...h },
+      baseURL: baseUrl,
+      url: apiUrl,
+      headers: { ...headers },
     })
-      .then((res) => {
-        console.log(res.data[val]);
-        return res.data[val];
-      })
-      .then((data) => {
+      .then(async (res) => {
+        const data = await res.data[isbnValue];
+        console.log(data);
+
         setprops({
           title: data?.title,
           imgUrl: data?.cover.large,
@@ -43,7 +44,7 @@ function App() {
           pages: data.number_of_pages,
           pubD: data.publish_date,
           pubH: Array.from(data.publishers),
-          olUrl : data?.url
+          olUrl: data?.url,
         });
       })
       .catch((er) => {
@@ -52,7 +53,7 @@ function App() {
   };
 
   return (
-    <div className="grid grid-flow-row">
+    <div className="grid min-h-svh grid-flow-row grid-rows-[auto_auto_1fr]">
       {show ? (
         <Alertmodal
           handleClick={() => {
@@ -62,15 +63,19 @@ function App() {
       ) : null}
       <Navbar />
       <SearchSection ref={sbox} handleClick={handlclick} />
-      <Main
-        title={getProps.title}
-        imgUrl={getProps.imgUrl}
-        authors={getProps.authors}
-        pubH={getProps.pubH}
-        pubD={getProps.pubD}
-        pages={getProps.pages}
-        olUrl={getProps.olUrl}
-      />
+      {getProps?.title ? (
+        <Main
+          title={getProps.title}
+          imgUrl={getProps.imgUrl}
+          authors={getProps.authors}
+          pubH={getProps.pubH}
+          pubD={getProps.pubD}
+          pages={getProps.pages}
+          olUrl={getProps.olUrl}
+        />
+      ) : (
+        <AboutIsbn />
+      )}
     </div>
   );
 }
